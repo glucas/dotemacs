@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-11-08 17:40:51 glucas>
+;; Time-stamp: <2018-11-08 17:58:52 glucas>
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -8,7 +8,7 @@
  '(package-archives
    '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "http://melpa.org/packages/")))
- '(package-selected-packages '(use-package ))
+ '(package-selected-packages '(terraform-mode unfill powershell use-package))
  '(sentence-end-double-space nil)
  '(truncate-lines t)
  '(user-full-name "Greg Lucas"))

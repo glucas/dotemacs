@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-11-08 17:44:07 glucas>
+;; Time-stamp: <2018-11-08 18:00:46 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -31,7 +31,21 @@
 (use-package unfill			; Single key to fill/unfill
   :bind ([remap fill-paragraph] . unfill-toggle))
 
+
+;;; Modes
+
 (use-package powershell                 ; Powershell
   :mode ("\\.ps[dm]?1\\'" . powershell-mode))
+
+
+(use-package terraform-mode             ; Terraform
+  :mode ("\\.tf\\(vars\\)?\\'" . terraform-mode)
+  :config
+  (add-hook 'terraform-mode-hook
+            (defun gml/terraform-mode-hook ()
+              (when buffer-file-name
+                (unless (string-match-p "\\.tfvars$" buffer-file-name)
+                  (terraform-format-on-save-mode))
+                (electric-pair-local-mode)))))
 
 ;;; init.el ends here
