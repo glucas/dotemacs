@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-11-08 17:17:00 glucas>
+;; Time-stamp: <2018-11-08 17:44:07 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -28,7 +28,10 @@
 
 ;;; Editing
 
-(use-package unfill		   ; Single key to fill/unfill
+(use-package unfill			; Single key to fill/unfill
   :bind ([remap fill-paragraph] . unfill-toggle))
+
+(use-package powershell                 ; Powershell
+  :mode ("\\.ps[dm]?1\\'" . powershell-mode))
 
 ;;; init.el ends here
