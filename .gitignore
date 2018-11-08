@@ -11,5 +11,7 @@
 *.~undo-tree
 
 # Local directories
+auto-save-list
 elpa
+eshell
 server
