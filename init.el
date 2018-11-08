@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-11-08 15:57:22 glucas>
+;; Time-stamp: <2018-11-08 17:17:00 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -19,5 +19,16 @@
 ;; load custom settings
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file nil t)
+
+;; load use-package
+(eval-when-compile
+  (require 'use-package))
+
+
+
+;;; Editing
+
+(use-package unfill		   ; Single key to fill/unfill
+  :bind ([remap fill-paragraph] . unfill-toggle))
 
 ;;; init.el ends here
