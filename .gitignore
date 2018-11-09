@@ -12,5 +12,6 @@
 
 # Local directories
 elpa
-var
 etc
+server
+var
