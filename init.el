@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-11-09 11:50:35 glucas>
+;; Time-stamp: <2018-11-09 14:43:00 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -16,8 +16,12 @@
 (dolist (mode '(tool-bar-mode scroll-bar-mode))
   (when (fboundp mode) (funcall mode -1)))
 
+;; trust me
+(setq disabled-command-function nil)
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 ;; load custom settings
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file nil t)
 
 ;; load use-package
@@ -50,9 +54,9 @@
   (swiper-action-recenter t)
   (swiper-include-line-number-in-search t)
   :bind (:map isearch-mode-map
-	      ("SPC" . gml/swiper-from-isearch))
+	      ("SPC" . my/swiper-from-isearch))
   :config
-  (defun gml/swiper-from-isearch ()
+  (defun my/swiper-from-isearch ()
     "Invoke swiper from isearch, adding a space to the query."
     (interactive)
     (if isearch-regexp
@@ -72,8 +76,7 @@
   :if (executable-find "git")
   :custom
   (magit-repository-directories '(("~/dev/src" . 3)))
-  :bind (("C-x g" . magit-status)
-         ("C-x M-g" . magit-dispatch-popup)))
+  :bind (("C-c g" . magit-status)))
 
 (use-package unfill			; Single key to fill/unfill
   :bind ([remap fill-paragraph] . unfill-toggle))
