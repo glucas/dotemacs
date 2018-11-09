@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-11-09 10:22:47 glucas>
+;; Time-stamp: <2018-11-09 11:50:35 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -32,15 +32,10 @@
     (add-to-list 'recentf-exclude no-littering-var-directory)
     (add-to-list 'recentf-exclude no-littering-etc-directory)))
 
-(use-package magit                      ; Git integration
-  :if (executable-find "git")
-  :custom
-  (magit-repository-directories '(("~/dev/src" . 3)))
-  :bind (("C-x g" . magit-status)
-         ("C-x M-g" . magit-dispatch-popup)))
-
 
-;;; Ivy
+;;; Completion framework
+
+(use-package smex)                      ; Track command frequency
 
 (use-package ivy                        ; Incremental Vertical completYon
   :custom
@@ -72,6 +67,13 @@
 
 
 ;;; Editing
+
+(use-package magit                      ; Git integration
+  :if (executable-find "git")
+  :custom
+  (magit-repository-directories '(("~/dev/src" . 3)))
+  :bind (("C-x g" . magit-status)
+         ("C-x M-g" . magit-dispatch-popup)))
 
 (use-package unfill			; Single key to fill/unfill
   :bind ([remap fill-paragraph] . unfill-toggle))
