@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-11-08 22:20:37 glucas>
+;; Time-stamp: <2018-11-09 10:22:47 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -92,5 +92,12 @@
                 (unless (string-match-p "\\.tfvars$" buffer-file-name)
                   (terraform-format-on-save-mode))
                 (electric-pair-local-mode)))))
+
+
+;;; Key Bindings
+
+(bind-keys
+ ("M-o" . other-window)
+ ("C-x k" . kill-this-buffer))
 
 ;;; init.el ends here
