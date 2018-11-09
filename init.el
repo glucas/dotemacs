@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-11-08 21:46:44 glucas>
+;; Time-stamp: <2018-11-08 22:09:56 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -31,6 +31,13 @@
   (with-eval-after-load 'recentf
     (add-to-list 'recentf-exclude no-littering-var-directory)
     (add-to-list 'recentf-exclude no-littering-etc-directory)))
+
+(use-package magit                      ; Git integration
+  :if (executable-find "git")
+  :custom
+  (magit-repository-directories '(("~/dev/src" . 3)))
+  :bind (("C-x g" . magit-status)
+         ("C-x M-g" . magit-dispatch-popup)))
 
 
 ;;; Editing
