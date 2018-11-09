@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-11-08 22:09:56 glucas>
+;; Time-stamp: <2018-11-08 22:20:37 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -38,6 +38,37 @@
   (magit-repository-directories '(("~/dev/src" . 3)))
   :bind (("C-x g" . magit-status)
          ("C-x M-g" . magit-dispatch-popup)))
+
+
+;;; Ivy
+
+(use-package ivy                        ; Incremental Vertical completYon
+  :custom
+  (ivy-use-virtual-buffers t)
+  (ivy-count-format "(%d/%d) ")
+  :init
+  (ivy-mode))
+
+(use-package swiper                     ; Ivy-based incremental search
+  :requires ivy
+  :custom
+  (swiper-action-recenter t)
+  (swiper-include-line-number-in-search t)
+  :bind (:map isearch-mode-map
+	      ("SPC" . gml/swiper-from-isearch))
+  :config
+  (defun gml/swiper-from-isearch ()
+    "Invoke swiper from isearch, adding a space to the query."
+    (interactive)
+    (if isearch-regexp
+	(setq isearch-regexp (concat isearch-regexp " "))
+      (setq isearch-string (concat isearch-string " ")))
+    (swiper-from-isearch)))
+
+(use-package counsel			; Ivy commands
+  :requires ivy
+  :init
+  (counsel-mode))
 
 
 ;;; Editing
