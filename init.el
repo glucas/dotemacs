@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-11-08 18:00:46 glucas>
+;; Time-stamp: <2018-11-08 21:46:44 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -24,6 +24,13 @@
 (eval-when-compile
   (require 'use-package))
 
+(use-package no-littering               ; Keep emacs.d organized
+  :demand
+  :config
+  (setq auto-save-file-name-transforms `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+  (with-eval-after-load 'recentf
+    (add-to-list 'recentf-exclude no-littering-var-directory)
+    (add-to-list 'recentf-exclude no-littering-etc-directory)))
 
 
 ;;; Editing
