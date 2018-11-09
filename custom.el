@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-11-09 14:42:11 glucas>
+;; Time-stamp: <2018-11-09 15:51:12 glucas>
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -11,7 +11,7 @@
    '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "http://melpa.org/packages/")))
  '(package-selected-packages
-   '(smex counsel swiper ivy magit no-littering terraform-mode unfill powershell use-package))
+   '(try smex counsel swiper ivy magit no-littering terraform-mode unfill powershell use-package))
  '(prog-mode-hook '(prettify-symbols-mode show-paren-mode))
  '(recentf-max-saved-items 50)
  '(sentence-end-double-space nil)

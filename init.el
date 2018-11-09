@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-11-09 14:43:00 glucas>
+;; Time-stamp: <2018-11-09 15:53:12 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -28,7 +28,8 @@
 (eval-when-compile
   (require 'use-package))
 
-(use-package no-littering               ; Keep emacs.d organized
+;; keep .emacs.d organized
+(use-package no-littering
   :demand
   :config
   (setq auto-save-file-name-transforms `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
@@ -37,7 +38,12 @@
     (add-to-list 'recentf-exclude no-littering-etc-directory)))
 
 
-;;; Completion framework
+;;; Configure Packages
+
+(use-package try                        ; Try packages without installing
+  :commands (try try-and-refresh))
+
+;;;; Ivy
 
 (use-package smex)                      ; Track command frequency
 
@@ -69,8 +75,7 @@
   :init
   (counsel-mode))
 
-
-;;; Editing
+;;;; Version Control
 
 (use-package magit                      ; Git integration
   :if (executable-find "git")
@@ -78,11 +83,7 @@
   (magit-repository-directories '(("~/dev/src" . 3)))
   :bind (("C-c g" . magit-status)))
 
-(use-package unfill			; Single key to fill/unfill
-  :bind ([remap fill-paragraph] . unfill-toggle))
-
-
-;;; Modes
+;;; Editing Modes
 
 (use-package powershell                 ; Powershell
   :mode ("\\.ps[dm]?1\\'" . powershell-mode))
@@ -100,6 +101,9 @@
 
 
 ;;; Key Bindings
+
+(use-package unfill			; Single key to fill/unfill
+  :bind ([remap fill-paragraph] . unfill-toggle))
 
 (bind-keys
  ("M-o" . other-window)
