@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-11-09 15:53:12 glucas>
+;; Time-stamp: <2018-11-09 16:57:34 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -40,6 +40,9 @@
 
 ;;; Configure Packages
 
+
+  :config
+
 (use-package try                        ; Try packages without installing
   :commands (try try-and-refresh))
 
@@ -78,6 +81,26 @@
 ;;;; Version Control
 
 (use-package magit                      ; Git integration
+;;;; Org
+
+(use-package org                        ; Org mode
+  :custom
+  (org-log-done 'time)
+  (org-startup-indented t)
+  (org-use-speed-commands t)
+  :custom-face
+  (org-meta-line ((t (:height 0.85))))
+  :bind
+  ("C-c c" . org-capture)
+  ("C-c a" . org-agenda)
+  ("C-c l" . org-store-link)
+  (:map org-mode-map
+        ("C-c C-8" . org-ctrl-c-star))
+  (:map org-src-mode-map
+        ("C-c C-c" . org-edit-src-exit))
+  :config
+  (load (locate-user-emacs-file "init.d/org")))
+
   :if (executable-find "git")
   :custom
   (magit-repository-directories '(("~/dev/src" . 3)))
@@ -93,7 +116,7 @@
   :mode ("\\.tf\\(vars\\)?\\'" . terraform-mode)
   :config
   (add-hook 'terraform-mode-hook
-            (defun gml/terraform-mode-hook ()
+            (defun my/terraform-mode-hook ()
               (when buffer-file-name
                 (unless (string-match-p "\\.tfvars$" buffer-file-name)
                   (terraform-format-on-save-mode))
@@ -102,11 +125,11 @@
 
 ;;; Key Bindings
 
-(use-package unfill			; Single key to fill/unfill
+(use-package unfill			; togle fill/unfill
   :bind ([remap fill-paragraph] . unfill-toggle))
 
 (bind-keys
- ("M-o" . other-window)
- ("C-x k" . kill-this-buffer))
+ ("M-o" . other-window)                 ; faster other-window
+ ("C-x k" . kill-this-buffer))          ; always kill current buffer
 
 ;;; init.el ends here
