@@ -43,12 +43,20 @@
   :config
   (setq auto-save-file-name-transforms `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
   (with-eval-after-load 'recentf
-    (add-to-list 'recentf-exclude no-littering-var-directory)
-    (add-to-list 'recentf-exclude no-littering-etc-directory)))
+    (add-to-list 'recentf-exclude (file-truename no-littering-var-directory))
+    (add-to-list 'recentf-exclude (file-truename no-littering-etc-directory))))
 
 
 ;;; Configure Packages
 
+(use-package recentf                    ; Recent files
+  :defer
+  :custom
+  (recentf-max-saved-items 100)
+  :config
+  (run-at-time t (* 5 60) (lambda () (let ((inhibit-message t)) (recentf-save-list))))
+  (add-to-list 'recentf-exclude ".*autoloads.el$")
+  (add-to-list 'recentf-exclude (file-truename (file-name-as-directory package-user-dir))))
 
   :config
 
