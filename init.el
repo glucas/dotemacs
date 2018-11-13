@@ -89,7 +89,8 @@
 (use-package ivy                        ; Incremental Vertical completYon
   :custom
   (ivy-use-virtual-buffers t)
-  (ivy-count-format "(%d/%d) ")
+  :bind
+  ([remap isearch-backward-regexp] . ivy-resume)
   :init
   (ivy-mode))
 
@@ -98,8 +99,10 @@
   :custom
   (swiper-action-recenter t)
   (swiper-include-line-number-in-search t)
-  :bind (:map isearch-mode-map
-	      ("SPC" . my/swiper-from-isearch))
+  :bind
+  ([remap isearch-forward-regexp] . swiper)
+  (:map isearch-mode-map
+	("SPC" . my/swiper-from-isearch))
   :config
   (defun my/swiper-from-isearch ()
     "Invoke swiper from isearch, adding a space to the query."
@@ -111,6 +114,8 @@
 
 (use-package counsel			; Ivy commands
   :requires ivy
+  :bind
+  ("C-c i" . counsel-semantic-or-imenu)
   :init
   (counsel-mode))
 
@@ -165,7 +170,12 @@
   :bind ([remap fill-paragraph] . unfill-toggle))
 
 (bind-keys
- ("M-o" . other-window)                 ; faster other-window
- ("C-x k" . kill-this-buffer))          ; always kill current buffer
+ ([remap list-buffers] . ibuffer-other-window)
+ ([remap kill-buffer] . kill-this-buffer))
+
+(bind-keys*
+ :filter (not (minibufferp))
+ ("M-o" . other-window)
+ ("M-i" . mode-line-other-buffer))
 
 ;;; init.el ends here
