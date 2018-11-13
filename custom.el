@@ -9,9 +9,6 @@
  '(enable-recursive-minibuffers t)
  '(help-window-select t)
  '(indent-tabs-mode nil)
- '(package-archives
-   '(("gnu" . "https://elpa.gnu.org/packages/")
-     ("melpa" . "http://melpa.org/packages/")))
  '(ls-lisp-use-insert-directory-program t)
  '(package-selected-packages
    '(try smex counsel swiper ivy magit no-littering terraform-mode unfill powershell use-package))
