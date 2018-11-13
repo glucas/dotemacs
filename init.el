@@ -119,9 +119,7 @@
   :init
   (counsel-mode))
 
-;;;; Version Control
 
-(use-package magit                      ; Git integration
 ;;;; Org
 
 (use-package org                        ; Org mode
@@ -142,26 +140,24 @@
   :config
   (load (locate-user-emacs-file "init.d/org")))
 
+;;;; External Tools
+
+(use-package magit                      ; git
   :if (executable-find "git")
   :custom
   (magit-repository-directories '(("~/dev/src" . 3)))
-  :bind (("C-c g" . magit-status)))
+  :bind
+  (("C-x g" . magit-status)))
+
+(use-package deadgrep                   ; ripgrep
+  :if (executable-find "rg")
+  :commands (deadgrep)
+  :init
+  (defalias 'rg 'deadgrep))
 
 ;;; Editing Modes
 
-(use-package powershell                 ; Powershell
-  :mode ("\\.ps[dm]?1\\'" . powershell-mode))
-
-
-(use-package terraform-mode             ; Terraform
-  :mode ("\\.tf\\(vars\\)?\\'" . terraform-mode)
-  :config
-  (add-hook 'terraform-mode-hook
-            (defun my/terraform-mode-hook ()
-              (when buffer-file-name
-                (unless (string-match-p "\\.tfvars$" buffer-file-name)
-                  (terraform-format-on-save-mode))
-                (electric-pair-local-mode)))))
+(load (locate-user-emacs-file "init.d/file-modes"))
 
 
 ;;; Key Bindings
