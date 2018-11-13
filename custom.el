@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-11-13 14:48:59 glucas>
+;; Time-stamp: <2018-11-13 15:08:00 glucas>
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -11,9 +11,8 @@
  '(indent-tabs-mode nil)
  '(ls-lisp-use-insert-directory-program t)
  '(package-selected-packages
-   '(projectile avy-zap ace-link ace-window avy easy-kill transpose-frame restclient lua-mode markdown-mode jump-char deadgrep try smex counsel swiper ivy magit no-littering terraform-mode unfill powershell use-package))
+   '(ivy-hydra hydra projectile avy-zap ace-link ace-window avy easy-kill transpose-frame restclient lua-mode markdown-mode jump-char deadgrep try smex counsel swiper ivy magit no-littering terraform-mode unfill powershell use-package))
  '(prog-mode-hook '(prettify-symbols-mode show-paren-mode semantic-mode))
- '(safe-local-variable-values '((projectile-project-name . "koko-trunk")))
  '(scroll-preserve-screen-position 1)
  '(sentence-end-double-space nil)
  '(set-mark-command-repeat-pop t)

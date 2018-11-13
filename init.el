@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-11-13 14:57:24 glucas>
+;; Time-stamp: <2018-11-13 15:07:38 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -82,6 +82,8 @@
 (use-package try                        ; Try packages without installing
   :commands (try try-and-refresh))
 
+(use-package hydra)                     ; Key bindings that stick around
+
 ;;;; Ivy
 
 (use-package smex)                      ; Track command frequency
@@ -94,6 +96,9 @@
   ([remap isearch-backward-regexp] . ivy-resume)
   :init
   (ivy-mode))
+
+(use-package ivy-hydra                  ; Additional key bindings for Ivy
+    :requires (ivy hydra))
 
 (use-package swiper                     ; Ivy-based incremental search
   :requires ivy
