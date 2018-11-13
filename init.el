@@ -58,7 +58,26 @@
   (add-to-list 'recentf-exclude ".*autoloads.el$")
   (add-to-list 'recentf-exclude (file-truename (file-name-as-directory package-user-dir))))
 
+(use-package eww                        ; Emacs Web Wowser
+  :custom
+  (shr-use-fonts nil)
+  :bind
+  (:map eww-mode-map
+        ("I" . my/eww-toggle-images))
+  (:map eww-link-keymap
+        ("I" . my/eww-toggle-images))
+  (:map goto-map
+        ("B" . eww-list-bookmarks))
   :config
+  (setq-default shr-inhibit-images t)
+
+  (defun my/eww-toggle-images ()
+    "Toggle whether images are loaded and reload the current page from cache."
+    (interactive)
+    (setq-local shr-inhibit-images (not shr-inhibit-images))
+    (eww-reload t)
+    (message "Images are now %s"
+             (if shr-inhibit-images "off" "on"))))
 
 (use-package try                        ; Try packages without installing
   :commands (try try-and-refresh))
