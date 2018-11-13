@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-11-13 14:25:41 glucas>
+;; Time-stamp: <2018-11-13 14:57:24 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -89,6 +89,7 @@
 (use-package ivy                        ; Incremental Vertical completYon
   :custom
   (ivy-use-virtual-buffers t)
+  (projectile-completion-system 'ivy)
   :bind
   ([remap isearch-backward-regexp] . ivy-resume)
   :init
@@ -163,6 +164,22 @@
         ("C-c C-c" . org-edit-src-exit))
   :config
   (load (locate-user-emacs-file "init.d/org")))
+
+;;;; Projectile
+
+(use-package projectile
+  :custom
+  (projectile-indexing-method 'alien)
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :hook
+  (prog-mode . projectile-mode)
+  :init
+  ;; Allow dir-locals to configure projectile
+  (put 'projectile-project-name 'safe-local-variable #'stringp)
+  (put 'projectile-enable-caching 'safe-local-variable #'booleanp)
+  (put 'projectile-indexing-method 'safe-local-variable
+       (lambda (arg) (memq arg '(native alien)))))
 
 ;;;; External Tools
 
