@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-11-09 16:57:34 glucas>
+;; Time-stamp: <2018-11-13 14:25:41 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -119,6 +119,30 @@
   :init
   (counsel-mode))
 
+;;;; Jump Around
+
+(use-package avy                        ; jump to visible text
+  :bind
+  (:map search-map
+        ("SPC" . avy-goto-word-or-subword-1)))
+
+(use-package avy-zap                    ; jump + zap
+  :bind
+  ([remap goto-line] . avy-goto-line)
+  ("M-z" . zap-up-to-char)
+  ("M-Z" . avy-zap-up-to-char))
+
+(use-package jump-char                  ; jump to char
+  :bind ("M-m" . jump-char-forward))
+
+(use-package ace-link                   ; jump to links
+  :init (ace-link-setup-default))
+
+(use-package ace-window                 ; jump to windows
+  :custom
+  (aw-keys '(?a ?s ?d ?f ?j ?k ?l))
+  :bind
+  ("C-c o" . ace-window))
 
 ;;;; Org
 
@@ -164,6 +188,23 @@
 
 (use-package unfill			; togle fill/unfill
   :bind ([remap fill-paragraph] . unfill-toggle))
+
+(use-package transpose-frame            ; rotate windows in frame
+  :bind ("C-c t" . transpose-frame))
+
+(use-package easy-kill                  ; enhanced kill-ring-save
+  :bind ([remap kill-ring-save] . easy-kill))
+
+(defmacro new-split-command (f)
+  "Switch to new window after a split command."
+  `(lambda ()
+     (interactive)
+     (funcall ,f)
+     (set-window-buffer (next-window) (other-buffer))
+     (other-window 1)))
+
+(bind-key [remap split-window-below] (new-split-command 'split-window-below))
+(bind-key [remap split-window-right] (new-split-command 'split-window-right))
 
 (bind-keys
  ([remap list-buffers] . ibuffer-other-window)
