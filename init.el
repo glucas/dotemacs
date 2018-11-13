@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-11-13 15:07:38 glucas>
+;; Time-stamp: <2018-11-13 15:14:22 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -80,7 +80,9 @@
              (if shr-inhibit-images "off" "on"))))
 
 (use-package try                        ; Try packages without installing
-  :commands (try try-and-refresh))
+  :commands (try try-and-refresh)
+  :config
+  (add-to-list 'recentf-exclude ".*/try.+.el$"))
 
 (use-package hydra)                     ; Key bindings that stick around
 
