@@ -20,13 +20,22 @@
 (setq disabled-command-function nil)
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; prefer UTF-8
+(prefer-coding-system 'utf-8)
+
+;; keep quiet
+(setq ring-bell-function
+      (defun my/flash-mode-line ()
+        (invert-face 'mode-line)
+        (run-with-timer 0.1 nil 'invert-face 'mode-line)))
+
 ;; load custom settings
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file nil t)
 
 ;; load use-package
-(eval-when-compile
-  (require 'use-package))
+(setq use-package-compute-statistics t)
+(require 'use-package)
 
 ;; keep .emacs.d organized
 (use-package no-littering

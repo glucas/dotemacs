@@ -5,17 +5,22 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(before-save-hook '(time-stamp))
+ '(confirm-kill-emacs 'y-or-n-p)
+ '(enable-recursive-minibuffers t)
  '(help-window-select t)
  '(indent-tabs-mode nil)
  '(package-archives
    '(("gnu" . "https://elpa.gnu.org/packages/")
      ("melpa" . "http://melpa.org/packages/")))
+ '(ls-lisp-use-insert-directory-program t)
  '(package-selected-packages
    '(try smex counsel swiper ivy magit no-littering terraform-mode unfill powershell use-package))
  '(prog-mode-hook '(prettify-symbols-mode show-paren-mode))
  '(recentf-max-saved-items 50)
+ '(scroll-preserve-screen-position 1)
  '(sentence-end-double-space nil)
  '(set-mark-command-repeat-pop t)
+ '(tab-always-indent 'complete)
  '(truncate-lines t)
  '(user-full-name "Greg Lucas"))
 (custom-set-faces
