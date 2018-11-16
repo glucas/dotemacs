@@ -1,10 +1,25 @@
-(use-package delight                    ; Configure mode lighters
+;;; mode-line.el --- Configure mode line  -*- lexical-binding: t; -*-
+
+;;
+;;; Code:
+
+(eval-when-compile (require 'use-package))
+
+;; Flash mode line for 'bell'
+(setq ring-bell-function
+      (defun my/flash-mode-line ()
+        (invert-face 'mode-line)
+        (run-with-timer 0.1 nil 'invert-face 'mode-line)))
+
+;; Hide useless mode lighters
+(use-package delight
   :init
   (delight
    '((eldoc-mode nil eldoc)
      (auto-revert-mode nil autorevert))))
 
-(use-package spaceline-config           ; Powerline
+;; Fancy powerline mode line
+(use-package spaceline-config
   :if (image-type-available-p 'xpm)
 
   :custom-face
@@ -61,3 +76,5 @@
   :config
   (defadvice powerline-major-mode (around delight-powerline-major-mode activate)
     (let ((inhibit-mode-name-delight nil)) ad-do-it)))
+
+;;; mode-line.el ends here
