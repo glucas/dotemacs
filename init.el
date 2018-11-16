@@ -42,9 +42,16 @@
   :demand
   :config
   (setq auto-save-file-name-transforms `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+  (setq custom-theme-directory (no-littering-expand-etc-file-name "themes/"))
   (with-eval-after-load 'recentf
     (add-to-list 'recentf-exclude (file-truename no-littering-var-directory))
     (add-to-list 'recentf-exclude (file-truename no-littering-etc-directory))))
+
+;; load OS- or host-specific themes
+(dolist (theme (list system-type (intern (downcase (system-name)))))
+  (condition-case
+      nil (load-theme theme t)
+    (error (message "Cannot load theme: %s" theme))))
 
 ;; Configure mode line
 (load (locate-user-emacs-file "init.d/mode-line"))
@@ -216,7 +223,7 @@
 
 ;;; Key Bindings
 
-(use-package unfill			; togle fill/unfill
+(use-package unfill			; toggle fill/unfill
   :bind ([remap fill-paragraph] . unfill-toggle))
 
 (use-package transpose-frame            ; rotate windows in frame
