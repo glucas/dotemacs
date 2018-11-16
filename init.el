@@ -195,6 +195,17 @@
   (put 'projectile-indexing-method 'safe-local-variable
        (lambda (arg) (memq arg '(native alien)))))
 
+(use-package bug-reference
+  :hook
+  (org-mode . bug-reference-mode)
+  (prog-mode . bug-reference-prog-mode)
+  :init
+  (defcustom bug-reference-url-format nil
+    "Format used to turn a bug number into a URL."
+    :group 'bug-reference)
+  (put 'bug-reference-bug-regexp 'safe-local-variable #'stringp)
+  (put 'bug-reference-url-format 'safe-local-variable #'stringp))
+
 ;;;; External Tools
 
 (use-package magit                      ; git
