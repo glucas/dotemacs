@@ -24,6 +24,12 @@
 (prefer-coding-system 'utf-8)
 
 ;; load custom settings
+(defgroup my/host nil
+  "Customizations local to a specific host."
+  :group 'initialization)
+
+(defcustom my/source-root-dir "~/src" "Root directory for source repositories." :group 'my/host)
+
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file nil t)
 
@@ -103,6 +109,26 @@
   (add-to-list 'recentf-exclude ".*/try.+.el$"))
 
 (use-package hydra)                     ; Key bindings that stick around
+
+(use-package buffer-protect             ; Protect buffers from being killed
+  :preface
+  (add-to-list 'load-path (expand-file-name  "github.com/glucas/buffer-protect" my/source-root-dir))
+  :demand t)
+
+(use-package yank-temp                  ; Copy text to temp buffer
+  :preface
+  (add-to-list 'load-path (expand-file-name  "github.com/glucas/yank-temp" my/source-root-dir))
+  :bind ("C-c y" . yank-temp-from-clipboard)
+  :config
+
+  (defhydra hydra-setup-temp-buffer (:color blue :timeout 3 :post (temp-buffer-set-revert-point))
+    ("l" lisp-interaction-mode "lisp")
+    ("j" (progn (js-mode) (json-pretty-print-buffer)) "json")
+    ("x" (progn (nxml-mode)) "xml")
+    ("t" (progn (turn-on-orgtbl) (org-table-convert-region (point-min) (point-max) nil)) "table")
+    ("c" (ansi-color-apply-on-region (point-min) (point-max)) "color"))
+
+  (add-hook 'yank-temp-initialized-hook #'hydra-setup-temp-buffer/body))
 
 ;;;; Ivy
 
@@ -225,7 +251,7 @@
 (use-package magit                      ; git
   :if (executable-find "git")
   :custom
-  (magit-repository-directories '(("~/dev/src" . 3)))
+  (magit-repository-directories `((,my/source-root-dir . 3)))
   :bind
   (("C-x g" . magit-status)))
 
