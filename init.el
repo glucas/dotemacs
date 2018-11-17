@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-11-13 23:15:38 glucas>
+;; Time-stamp: <2018-11-17 15:44:56 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -61,6 +61,20 @@
   (run-at-time t (* 5 60) (lambda () (let ((inhibit-message t)) (recentf-save-list))))
   (add-to-list 'recentf-exclude ".*autoloads.el$")
   (add-to-list 'recentf-exclude (file-truename (file-name-as-directory package-user-dir))))
+
+(use-package dired                      ; Directory listings
+  :bind
+  ("C-x C-j" . dired-jump)
+  ("C-x 4 j" . dired-jump-other-window)
+  (:map dired-mode-map
+        ("C-k" . my/dired-kill-line))
+  :config
+  (defun my/dired-kill-line ()
+    "Kill the current line or subdirectory."
+    (interactive)
+    (if (dired-get-subdir)
+	(dired-kill-subdir)
+      (dired-kill-line 1))))
 
 (use-package eww                        ; Emacs Web Wowser
   :custom
