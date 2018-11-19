@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-11-17 15:44:56 glucas>
+;; Time-stamp: <2018-11-19 17:10:35 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -303,6 +303,7 @@
   :bind ("C-c t" . transpose-frame))
 
 (use-package easy-kill                  ; enhanced kill-ring-save
+  :disabled t
   :bind ([remap kill-ring-save] . easy-kill))
 
 (defmacro new-split-command (f)
