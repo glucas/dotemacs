@@ -230,6 +230,7 @@
   :delight
   :custom
   (projectile-indexing-method 'alien)
+  (projectile-switch-project-action 'projectile-commander)
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :hook
