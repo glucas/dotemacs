@@ -103,6 +103,12 @@
     (message "Images are now %s"
              (if shr-inhibit-images "off" "on"))))
 
+(use-package ediff                      ; Ediff
+  :bind
+  ("C-c d" . ediff-current-file)
+  :config
+  (load (locate-user-emacs-file "init.d/ediff")))
+
 (use-package try                        ; Try packages without installing
   :commands (try try-and-refresh)
   :config
