@@ -283,6 +283,16 @@
 
 (load (locate-user-emacs-file "init.d/file-modes"))
 
+;;;; Server
+
+(use-package server                     ; Emacs daemon
+  :bind (("C-x C-3" . server-edit)))    ; C-x C-#
+
+(use-package edit-server
+  :defer 10                             ; Browser edit server
+  :init
+  (edit-server-start))
+
 
 ;;; Key Bindings
 
