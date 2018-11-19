@@ -175,7 +175,7 @@
   :requires ivy
   :delight
   :bind
-  ("C-c i" . counsel-semantic-or-imenu)
+  ("C-c m" . counsel-semantic-or-imenu)
   :init
   (counsel-mode))
 
@@ -203,6 +203,17 @@
   (aw-keys '(?a ?s ?d ?f ?j ?k ?l))
   :bind
   ("C-c o" . ace-window))
+
+(use-package goto-last-change           ; jump to last change
+  :bind
+  ("C-M-z" . goto-last-change-with-auto-marks))
+
+;;;; Editing
+
+(use-package change-inner
+  :bind
+  ("C-c i" . change-inner)
+  ("C-c I" . change-outer))
 
 ;;;; Org
 
