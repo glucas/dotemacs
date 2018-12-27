@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-12-27 10:23:05 glucas>
+;; Time-stamp: <2018-12-27 11:01:24 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -239,6 +239,20 @@
   :bind
   ("C-c i" . change-inner)
   ("C-c I" . change-outer))
+
+;;;; Completion
+
+(use-package company                    ; Complete anything
+  :delight
+  :commands
+  (company-mode)
+  :bind
+  (:map company-active-map
+        ("<tab>" . company-complete-common-or-cycle)
+        ("M-." . company-show-location)
+        ("C-o" . company-other-backend)
+        ("C-n" . company-select-next)
+        ("C-p" . company-select-previous)))
 
 ;;;; Org
 
