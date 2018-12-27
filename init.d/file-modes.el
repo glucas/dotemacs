@@ -34,4 +34,12 @@
   :mode ("\\.rest\\'" . restclient-mode)
   :commands restclient-mode)
 
+(use-package gradle-mode
+  :mode ("\\.gradle\\'" . gradle-mode)
+  :commands gradle-mode)
+
+(use-package groovy-mode
+  :mode ("\\.gradle\\'" . groovy-mode)
+  :commands groovy-mode)
+
 ;;; file-modes.el ends here
