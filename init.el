@@ -351,4 +351,10 @@
  ("M-o" . other-window)
  ("M-i" . mode-line-other-buffer))
 
+(defun my/clean-buffer ()
+  (interactive)
+  (delete-trailing-whitespace)
+  (indent-region (point-min) (point-max) nil)
+  (untabify (point-min) (point-max)))
+
 ;;; init.el ends here
