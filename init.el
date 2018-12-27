@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-11-19 17:10:35 glucas>
+;; Time-stamp: <2018-12-27 10:23:05 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -135,6 +135,29 @@
     ("c" (ansi-color-apply-on-region (point-min) (point-max)) "color"))
 
   (add-hook 'yank-temp-initialized-hook #'hydra-setup-yank-temp/body))
+
+;;;; Appearance
+
+(use-package stripe-buffer              ; Row highlighting in tables/lists
+  :hook
+  ((archive-moden
+    bookmark-bmenu-mode
+    dired-mode
+    eww-bookmark-mode
+    ibuffer-mode
+    package-menu-mode
+    occur-mode
+    vc-dir-mode)
+   . stripe-listify-buffer)
+  :custom-face
+  (stripe-highlight ((t (:background "ghost white"))))
+  (stripe-hl-line ((t (:inherit hl-line)))))
+
+(use-package hl-line                    ;  Highlight line
+  :commands
+  (hl-line-mode)
+  :custom-face
+  (hl-line ((t (:background "lavender")))))
 
 ;;;; Ivy
 
