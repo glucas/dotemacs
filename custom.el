@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-12-27 10:01:53 glucas>
+;; Time-stamp: <2018-12-27 10:37:22 glucas>
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -13,7 +13,6 @@
  '(package-selected-packages
    '(stripe-buffer groovy-mode gradle-mode goto-last-change change-inner edit-server spaceline delight ivy-hydra hydra projectile avy-zap ace-link ace-window avy easy-kill transpose-frame restclient lua-mode markdown-mode jump-char deadgrep try smex counsel swiper ivy magit no-littering terraform-mode unfill powershell use-package))
  '(prog-mode-hook '(prettify-symbols-mode show-paren-mode semantic-mode))
- '(rng-nxml-auto-validate-flag nil)
  '(scroll-preserve-screen-position 1)
  '(sentence-end-double-space nil)
  '(set-mark-command-repeat-pop t)
@@ -25,5 +24,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight normal :height 100 :width normal))))
- '(org-meta-line ((t (:height 0.85)))))
+ '(default ((t (:family "Consolas" :foundry "outline" :slant normal :weight normal :height 100 :width normal)))))

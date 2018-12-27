@@ -5,6 +5,13 @@
 
 (eval-when-compile (require 'use-package))
 
+(use-package nxml-                      ; XML
+  :defer
+  :custom
+  (nxml-child-indent 4)
+  (nxml-slash-auto-complete-flag t)
+  (rng-nxml-auto-validate-flag nil))
+
 (use-package powershell                 ; Powershell
   :mode ("\\.ps[dm]?1\\'" . powershell-mode)
   :commands (powershell-mode powershell))
