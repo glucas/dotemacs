@@ -206,8 +206,10 @@
 
 (use-package avy                        ; jump to visible text
   :bind
-  (:map search-map
-        ("SPC" . avy-goto-word-or-subword-1)))
+  ("M-M" . avy-goto-word-or-subword-1)
+  ;; (:map search-map
+  ;;       ("SPC" . avy-goto-word-or-subword-1))
+  )
 
 (use-package avy-zap                    ; jump + zap
   :bind
