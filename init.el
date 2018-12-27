@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-12-27 11:01:24 glucas>
+;; Time-stamp: <2018-12-27 11:21:31 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -243,9 +243,20 @@
 ;;;; Completion
 
 (use-package company                    ; Complete anything
-  :delight
   :commands
-  (company-mode)
+  (company-mode company-complete)
+  :hook
+  ((prog-mode nxml-mode) . company-mode)
+  :bind
+  ("C-c TAB" . company-complete)
+  :custom
+  (company-backends '(company-semantic
+                      company-capf
+                      company-files
+                      company-nxml
+                      company-css
+                      (company-dabbrev-code company-gtags company-etags company-keywords)
+                      company-dabbrev))
   :bind
   (:map company-active-map
         ("<tab>" . company-complete-common-or-cycle)
