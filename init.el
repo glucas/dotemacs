@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-12-27 11:21:31 glucas>
+;; Time-stamp: <2018-12-28 10:47:01 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -79,7 +79,7 @@
     "Kill the current line or subdirectory."
     (interactive)
     (if (dired-get-subdir)
-	(dired-kill-subdir)
+        (dired-kill-subdir)
       (dired-kill-line 1))))
 
 (use-package eww                        ; Emacs Web Wowser
@@ -174,7 +174,7 @@
   (ivy-mode))
 
 (use-package ivy-hydra                  ; Additional key bindings for Ivy
-    :requires (ivy hydra))
+  :requires (ivy hydra))
 
 (use-package swiper                     ; Ivy-based incremental search
   :requires ivy
@@ -184,17 +184,17 @@
   :bind
   ([remap isearch-forward-regexp] . swiper)
   (:map isearch-mode-map
-	("SPC" . my/swiper-from-isearch))
+        ("SPC" . my/swiper-from-isearch))
   :config
   (defun my/swiper-from-isearch ()
     "Invoke swiper from isearch, adding a space to the query."
     (interactive)
     (if isearch-regexp
-	(setq isearch-regexp (concat isearch-regexp " "))
+        (setq isearch-regexp (concat isearch-regexp " "))
       (setq isearch-string (concat isearch-string " ")))
     (swiper-from-isearch)))
 
-(use-package counsel			; Ivy commands
+(use-package counsel                    ; Ivy commands
   :requires ivy
   :delight
   :bind
@@ -357,7 +357,7 @@
 
 ;;; Key Bindings
 
-(use-package unfill			; toggle fill/unfill
+(use-package unfill                     ; toggle fill/unfill
   :bind ([remap fill-paragraph] . unfill-toggle))
 
 (use-package transpose-frame            ; rotate windows in frame
@@ -392,5 +392,14 @@
   (delete-trailing-whitespace)
   (indent-region (point-min) (point-max) nil)
   (untabify (point-min) (point-max)))
+
+(defun my/revert-buffer ()
+  "Revert buffer, prompting for confirmation only if the buffer is modified."
+  (interactive)
+  (revert-buffer :ignore-auto (not (buffer-modified-p)) :preserve-modes))
+
+(bind-keys
+ ("C-c w" . my/clean-buffer)
+ ("C-c r" . my/revert-buffer))
 
 ;;; init.el ends here

@@ -1,11 +1,11 @@
 ;;; file-modes.el --- Configure modes for editing various types of files  -*- lexical-binding: t; -*-
 
-;; 
+;;
 ;;; Code:
 
 (eval-when-compile (require 'use-package))
 
-(use-package nxml-                      ; XML
+(use-package nxml-mode                  ; XML
   :defer
   :custom
   (nxml-child-indent 4)
