@@ -247,23 +247,34 @@
   (company-mode company-complete)
   :hook
   ((prog-mode nxml-mode) . company-mode)
-  :bind
-  ("C-c TAB" . company-complete)
   :custom
   (company-backends '(company-semantic
                       company-capf
                       company-files
-                      company-nxml
-                      company-css
                       (company-dabbrev-code company-gtags company-etags company-keywords)
                       company-dabbrev))
   :bind
+  (:map company-mode-map
+        ([remap indent-for-tab-command] . company-indent-or-complete-common))
   (:map company-active-map
         ("<tab>" . company-complete-common-or-cycle)
         ("M-." . company-show-location)
         ("C-o" . company-other-backend)
         ("C-n" . company-select-next)
-        ("C-p" . company-select-previous)))
+        ("C-p" . company-select-previous))
+
+  :init
+  (add-hook 'nxml-mode-hook
+            (lambda ()
+              (add-to-list (make-local-variable 'company-backends) '(company-nxml))))
+  (add-hook 'css-mode-hook
+            (lambda ()
+              (add-to-list (make-local-variable 'company-backends) '(company-css)))))
+
+(use-package company-quickhelp
+  :after company
+  :commands (company-quickhelp-mode)
+  :config (company-quickhelp-mode 1))
 
 ;;;; Org
 

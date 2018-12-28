@@ -27,6 +27,13 @@
                   (terraform-format-on-save-mode))
                 (electric-pair-local-mode)))))
 
+(use-package company-terraform         ; Terraform completion
+  :after (terraform-mode company)
+  :config
+  (add-hook 'terraform-mode-hook
+            (lambda ()
+              (add-to-list (make-local-variable 'company-backends) 'company-terraform))))
+
 (use-package markdown-mode              ; Markdown
   :custom
   (markdown-command "pandoc")
@@ -40,6 +47,13 @@
 (use-package restclient                 ; REST client
   :mode ("\\.rest\\'" . restclient-mode)
   :commands restclient-mode)
+
+(use-package company-restclient         ; REST client completion
+  :after (restclient company)
+  :config
+  (add-hook 'restclient-mode-hook
+            (lambda ()
+              (add-to-list (make-local-variable 'company-backends) 'company-restclient))))
 
 (use-package gradle-mode
   :mode ("\\.gradle\\'" . gradle-mode)
