@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2018-12-28 10:47:01 glucas>
+;; Time-stamp: <2019-01-03 19:16:14 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -109,14 +109,17 @@
   :config
   (load (locate-user-emacs-file "init.d/ediff")))
 
-(use-package try                        ; Try packages without installing
+(use-package try                     ; Try packages without installing
   :commands (try try-and-refresh)
   :config
   (add-to-list 'recentf-exclude ".*/try.+.el$"))
 
-(use-package hydra)                     ; Key bindings that stick around
+(use-package hydra)                   ; Key bindings that stick around
 
-(use-package buffer-protect             ; Protect buffers from being killed
+(use-package use-package-hydra       ; Define hydras with use-package
+  :after hydra)
+
+(use-package buffer-protect           ; Keep buffers from being killed
   :preface
   (add-to-list 'load-path (expand-file-name  "github.com/glucas/buffer-protect" my/source-root-dir))
   :demand t)
@@ -232,6 +235,25 @@
 (use-package goto-last-change           ; jump to last change
   :bind
   ("C-M-z" . goto-last-change-with-auto-marks))
+
+(use-package hl-todo                    ; jump to TODOs
+  :hook
+  (prog-mode . hl-todo-mode)
+  :bind
+  (:map hl-todo-mode-map
+        ("M-s t" . hydra/hl-todo/body))
+  :hydra
+  (hydra/hl-todo
+   (:hint nil)
+   "
+TODOs:
+_j_: next        _o_ccur
+_k_: previous    _q_uit
+"
+   ("o" hl-todo-occur)
+   ("j" hl-todo-next)
+   ("k" hl-todo-previous)
+   ("q" nil nil :color blue)))
 
 ;;;; Editing
 
