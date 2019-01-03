@@ -18,7 +18,8 @@
  '(set-mark-command-repeat-pop t)
  '(tab-always-indent 'complete)
  '(truncate-lines t)
- '(user-full-name "Greg Lucas"))
+ '(user-full-name "Greg Lucas")
+ '(x-stretch-cursor t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
