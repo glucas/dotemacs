@@ -125,11 +125,16 @@
   :demand t)
 
 (use-package yank-temp                  ; Copy text to temp buffer
+  :demand t
   :preface
   (add-to-list 'load-path (expand-file-name  "github.com/glucas/yank-temp" my/source-root-dir))
   :bind ("C-c y" . yank-temp-from-clipboard)
+  :init
+  (add-hook 'window-setup-hook
+            (lambda () (when (get-buffer "*scratch*")
+                    (with-current-buffer "*scratch*"
+                      (yank-temp-set-revert-point)))))
   :config
-
   (defhydra hydra-setup-yank-temp (:color blue :timeout 3 :post (yank-temp-set-revert-point))
     ("l" lisp-interaction-mode "lisp")
     ("j" (progn (js-mode) (json-pretty-print-buffer)) "json")
