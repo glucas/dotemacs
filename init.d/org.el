@@ -17,4 +17,14 @@
          (file+headline "inbox.org" "Tasks")
          "* TODO %i\n%U" :immediate-finish t :empty-lines 1)))
 
+;;; Add-ons
+
+(eval-when-compile (require 'use-package))
+
+(use-package ob-html-chrome
+  :after org
+  ;; :custom (org-babel-html-chrome-chrome-executable "...")
+  :config
+  (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images))
+
 ;;; org.el ends here
