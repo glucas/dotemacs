@@ -352,6 +352,42 @@ _k_: previous    _q_uit
   (put 'bug-reference-bug-regexp 'safe-local-variable #'stringp)
   (put 'bug-reference-url-format 'safe-local-variable #'stringp))
 
+(use-package eyebrowse
+  :after
+  hydra
+  :custom
+  (eyebrowse-new-workspace t)
+  (eyebrowse-wrap-around t)
+  (eyebrowse-default-workspace-slot 0)
+  (eyebrowse-mode t)
+  :bind
+  ("C-c C-l" . hydra/eyebrowse/body)
+  :hydra
+  ;; https://www.wisdomandwonder.com/article/10596/screencast-building-a-little-ui-to-manage-buffers
+  (hydra/eyebrowse (:color blue :hint nil)
+                   "
+current eyebrowse slot: %(eyebrowse--get 'current-slot)
+ _j_ previous _k_ next _l_ last _u_ close _i_ choose _o_ rename _q_ quit
+   _a_ 00 _s_ 01 _d_ 02 _f_ 03 _g_ 04 _z_ 05 _x_ 06 _c_ 07 _v_ 08 _b_ 09"
+                   ("j" #'eyebrowse-prev-window-config :exit nil)
+                   ("k" #'eyebrowse-next-window-config :exit nil)
+                   ("l" #'eyebrowse-last-window-config)
+                   ("u" #'eyebrowse-close-window-config :exit nil)
+                   ("i" #'eyebrowse-switch-to-window-config)
+                   ("o" #'eyebrowse-rename-window-config :exit nil)
+                   ("q" nil)
+                   ("a" #'eyebrowse-switch-to-window-config-0)
+                   ("s" #'eyebrowse-switch-to-window-config-1)
+                   ("d" #'eyebrowse-switch-to-window-config-2)
+                   ("f" #'eyebrowse-switch-to-window-config-3)
+                   ("g" #'eyebrowse-switch-to-window-config-4)
+                   ("z" #'eyebrowse-switch-to-window-config-5)
+                   ("x" #'eyebrowse-switch-to-window-config-6)
+                   ("c" #'eyebrowse-switch-to-window-config-7)
+                   ("v" #'eyebrowse-switch-to-window-config-8)
+                   ("b" #'eyebrowse-switch-to-window-config-9))
+  )
+
 ;;;; External Tools
 
 (use-package magit                      ; git
