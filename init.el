@@ -406,6 +406,7 @@ _k_: previous    _q_uit
 (bind-key [remap split-window-right] (new-split-command 'split-window-right))
 
 (bind-keys
+ ([remap delete-char] . delete-forward-char)
  ([remap list-buffers] . ibuffer-other-window)
  ([remap kill-buffer] . kill-this-buffer))
 
