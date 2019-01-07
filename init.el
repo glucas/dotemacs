@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2019-01-04 16:46:42 glucas>
+;; Time-stamp: <2019-01-06 22:04:44 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -236,8 +236,15 @@
   ("C-c o" . ace-window))
 
 (use-package goto-last-change           ; jump to last change
-  :bind
-  ("C-M-z" . goto-last-change-with-auto-marks))
+  :commands goto-last-change-with-auto-marks)
+
+(use-package hilit-chg                  ; jump to changes
+  :custom
+  (highlight-changes-visibility-initial-state nil)
+  :commands
+  (highlight-changes-previous-change highlight-changes-next-change highlight-changes-visible-mode)
+  :hook
+  (find-file-hook . highlight-changes-mode))
 
 (use-package hl-todo                    ; jump to TODOs
   :hook
@@ -250,12 +257,12 @@
    (:hint nil)
    "
 TODOs:
-_j_: next        _o_ccur
-_k_: previous    _q_uit
+_j_: prevoius   _o_ccur
+_k_: next       _q_uit
 "
    ("o" hl-todo-occur)
-   ("j" hl-todo-next)
-   ("k" hl-todo-previous)
+   ("j" hl-todo-previous)
+   ("k" hl-todo-next)
    ("q" nil nil :color blue)))
 
 ;;;; Editing
@@ -482,5 +489,19 @@ _k_: previous error    _l_: last error
    nil :bind nil)
   ("q" nil            nil :color blue))
 
+;; Navigate changes
+(defhydra hydra/goto-changes
+  (global-map "C-c" :hint nil
+              :pre (highlight-changes-visible-mode 1)
+              :post (highlight-changes-visible-mode 0))
+  "
+Changes:
+_j_: previous        _h_: last
+_k_: next            _q_: quit
+"
+  ("h" goto-last-change-with-auto-marks)
+  ("j" highlight-changes-previous-change)
+  ("k" highlight-changes-next-change)
+  ("q" nil nil :color blue :bind nil))
 
 ;;; init.el ends here
