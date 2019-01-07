@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2019-01-03 19:16:14 glucas>
+;; Time-stamp: <2019-01-04 16:46:42 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -172,7 +172,6 @@
 (use-package smex)                      ; Track command frequency
 
 (use-package ivy                        ; Incremental Vertical completYon
-  :delight
   :custom
   (ivy-use-virtual-buffers t)
   (projectile-completion-system 'ivy)
@@ -204,7 +203,6 @@
 
 (use-package counsel                    ; Ivy commands
   :requires ivy
-  :delight
   :bind
   ("C-c m" . counsel-semantic-or-imenu)
   :init
@@ -326,7 +324,6 @@ _k_: previous    _q_uit
 ;;;; Projects
 
 (use-package projectile
-  :delight
   :custom
   (projectile-indexing-method 'alien)
   (projectile-switch-project-action 'projectile-commander)
