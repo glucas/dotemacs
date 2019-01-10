@@ -512,4 +512,11 @@ Changes:
   ("K" highlight-changes-next-change)
   ("q" nil nil :color blue :bind nil))
 
+
+(defhydra hydra/page (ctl-x-map "" :pre (widen))
+  "page"
+  ("]" forward-page "next")
+  ("[" backward-page "prev")
+  ("n" narrow-to-page "narrow" :bind nil :exit t))
+
 ;;; init.el ends here
