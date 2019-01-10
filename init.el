@@ -456,7 +456,12 @@ current eyebrowse slot: %(eyebrowse--get 'current-slot)
 (bind-keys
  ([remap delete-char] . delete-forward-char)
  ([remap list-buffers] . ibuffer-other-window)
- ([remap kill-buffer] . kill-this-buffer))
+ ([remap kill-buffer] . kill-this-buffer)
+ ([remap upcase-word] . upcase-dwim)
+ ([remap downcase-word] . downcase-dwim)
+ ([remap capitalize-word] . capitalize-dwim)
+ ([remap view-hello-file] . (lambda () (interactive) (find-file user-init-file)))
+ )
 
 (bind-keys*
  :filter (not (minibufferp))
