@@ -428,6 +428,13 @@ current eyebrowse slot: %(eyebrowse--get 'current-slot)
   :defer 10                             ; Browser edit server
   :init
   (edit-server-start))
+;;;; Help
+
+(use-package which-key
+  :custom
+  (which-key-idle-delay 2.0)
+  :hook
+  (emacs-startup . which-key-mode))
 
 
 ;;; Key Bindings
