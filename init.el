@@ -238,14 +238,6 @@
 (use-package goto-last-change           ; jump to last change
   :commands goto-last-change-with-auto-marks)
 
-(use-package hilit-chg                  ; jump to changes
-  :custom
-  (highlight-changes-visibility-initial-state nil)
-  :commands
-  (highlight-changes-previous-change highlight-changes-next-change highlight-changes-visible-mode)
-  :hook
-  (find-file-hook . highlight-changes-mode))
-
 (use-package hl-todo                    ; jump to TODOs
   :hook
   (prog-mode . hl-todo-mode)
@@ -275,6 +267,18 @@ _k_: next       _q_uit
   :bind
   ("C-c i" . change-inner)
   ("C-c I" . change-outer))
+
+(use-package hilit-chg                  ; show/navigate changes
+  :custom
+  (highlight-changes-visibility-initial-state nil)
+  :hook
+  (find-file . highlight-changes-mode-turn-on))
+
+(use-package diff-hl
+  :hook
+  (emacs-startup . global-diff-hl-mode)
+  (dired-mode . diff-hl-dired-mode-unless-remote)
+  (magit-post-refresh . diff-hl-magit-post-refresh))
 
 ;;;; Completion
 
@@ -500,12 +504,12 @@ _k_: previous error    _l_: last error
               :post (highlight-changes-visible-mode 0))
   "
 Changes:
-_j_: previous        _h_: last
-_k_: next            _q_: quit
 "
   ("h" goto-last-change-with-auto-marks)
-  ("j" highlight-changes-previous-change)
-  ("k" highlight-changes-next-change)
+  ("j" diff-hl-previous-hunk)
+  ("k" diff-hl-next-hunk)
+  ("J" highlight-changes-previous-change)
+  ("K" highlight-changes-next-change)
   ("q" nil nil :color blue :bind nil))
 
 ;;; init.el ends here
