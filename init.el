@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2019-01-06 22:04:44 glucas>
+;; Time-stamp: <2019-01-09 15:28:04 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -39,7 +39,6 @@
 
 ;; keep .emacs.d organized
 (use-package no-littering
-  :demand
   :config
   (setq auto-save-file-name-transforms `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
   (setq custom-theme-directory (no-littering-expand-etc-file-name "themes/"))
@@ -60,7 +59,8 @@
 ;;; Configure Packages
 
 (use-package recentf                    ; Recent files
-  :defer
+  :hook
+  (emacs-startup . recentf-mode)
   :custom
   (recentf-max-saved-items 100)
   :config
@@ -121,19 +121,17 @@
 
 (use-package buffer-protect           ; Keep buffers from being killed
   :preface
-  (add-to-list 'load-path (expand-file-name  "github.com/glucas/buffer-protect" my/source-root-dir))
-  :demand t)
+  (add-to-list 'load-path (expand-file-name  "github.com/glucas/buffer-protect" my/source-root-dir)))
 
 (use-package yank-temp                  ; Copy text to temp buffer
-  :demand t
   :preface
   (add-to-list 'load-path (expand-file-name  "github.com/glucas/yank-temp" my/source-root-dir))
   :bind ("C-c y" . yank-temp-from-clipboard)
-  :init
+  :config
   (add-hook 'window-setup-hook
             (lambda () (when (get-buffer "*scratch*")
-                    (with-current-buffer "*scratch*"
-                      (yank-temp-set-revert-point)))))
+                         (with-current-buffer "*scratch*"
+                           (yank-temp-set-revert-point)))))
   :config
   (defhydra hydra-setup-yank-temp (:color blue :timeout 3 :post (yank-temp-set-revert-point))
     ("l" lisp-interaction-mode "lisp")
@@ -371,12 +369,11 @@ _k_: next       _q_uit
   (eyebrowse-new-workspace t)
   (eyebrowse-wrap-around t)
   (eyebrowse-default-workspace-slot 0)
-  (eyebrowse-mode t)
   :bind
   ("C-c C-l" . hydra/eyebrowse/body)
   :hydra
   ;; https://www.wisdomandwonder.com/article/10596/screencast-building-a-little-ui-to-manage-buffers
-  (hydra/eyebrowse (:color blue :hint nil)
+  (hydra/eyebrowse (:color blue :hint nil :body-pre (eyebrowse-mode 1))
                    "
 current eyebrowse slot: %(eyebrowse--get 'current-slot)
  _j_ previous _k_ next _l_ last _u_ close _i_ choose _o_ rename _q_ quit
@@ -425,9 +422,9 @@ current eyebrowse slot: %(eyebrowse--get 'current-slot)
   :bind (("C-x C-3" . server-edit)))    ; C-x C-#
 
 (use-package edit-server
-  :defer 10                             ; Browser edit server
-  :init
-  (edit-server-start))
+  :hook
+  (emacs-startup . edit-server-start))
+
 ;;;; Help
 
 (use-package which-key
