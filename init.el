@@ -267,7 +267,11 @@ _k_: next       _q_uit
 
 ;;;; Editing
 
-(use-package change-inner
+(use-package iedit                      ; edit all occurences
+  :bind
+  ("C-;" . iedit-mode))
+
+(use-package change-inner               ; replace semantic units
   :bind
   ("C-c i" . change-inner)
   ("C-c I" . change-outer))
