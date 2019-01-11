@@ -9,13 +9,20 @@
       '(
         ;; Capture interactively:
         ("t" "Task" entry
-         (file+headline "inbox.org" "Tasks")
+         (file "")
          "* TODO %?\n%U"  :empty-lines 1)
+        ("n" "Note" entry
+         (file "")
+         "* %?\n%U"  :empty-lines 1)
 
         ;; Capture in the background:
         ("T" "Task from content"  entry
-         (file+headline "inbox.org" "Tasks")
-         "* TODO %i\n%U" :immediate-finish t :empty-lines 1)))
+         (file "")
+         "* TODO %i\n%U" :immediate-finish t :empty-lines 1)
+        ("N" "Task from content"  entry
+         (file "")
+         "* TODO %i\n%U" :immediate-finish t :empty-lines 1)
+        ))
 
 ;;; Add-ons
 

@@ -267,13 +267,13 @@ _k_: next       _q_uit
   ("C-c i" . change-inner)
   ("C-c I" . change-outer))
 
-(use-package hilit-chg                  ; show/navigate changes
+(use-package hilit-chg                  ; highlight recent changes
   :custom
   (highlight-changes-visibility-initial-state nil)
   :hook
   (find-file . highlight-changes-mode-turn-on))
 
-(use-package diff-hl
+(use-package diff-hl                    ; highlight uncommited changes
   :hook
   (emacs-startup . global-diff-hl-mode)
   (dired-mode . diff-hl-dired-mode-unless-remote)
@@ -322,6 +322,9 @@ _k_: next       _q_uit
   (org-log-done 'time)
   (org-startup-indented t)
   (org-use-speed-commands t)
+  (org-directory "~/Dropbox/org")
+  (org-default-notes-file "inbox.org")
+  (org-agenda-files (list org-directory))
   :custom-face
   (org-meta-line ((t (:height 0.85))))
   :bind
