@@ -6,7 +6,7 @@
 (eval-when-compile (require 'use-package))
 
 (use-package nxml-mode                  ; XML
-  :defer
+  :mode "\\.pom\\'"
   :custom
   (nxml-child-indent 4)
   (nxml-slash-auto-complete-flag t)
@@ -14,11 +14,10 @@
 
 (use-package powershell                 ; Powershell
   :mode ("\\.ps[dm]?1\\'" . powershell-mode)
-  :commands (powershell-mode powershell))
+  :commands (powershell))
 
 (use-package terraform-mode             ; Terraform
-  :mode ("\\.tf\\(vars\\)?\\'" . terraform-mode)
-  :commands terraform-mode
+  :mode "\\.tf\\(vars\\)?\\'"
   :config
   (add-hook 'terraform-mode-hook
             (defun my/terraform-mode-hook ()
@@ -35,18 +34,15 @@
               (add-to-list (make-local-variable 'company-backends) 'company-terraform))))
 
 (use-package markdown-mode              ; Markdown
+  :mode "\\.md\\'"
   :custom
-  (markdown-command "pandoc")
-  :mode ("\\.md\\'" . markdown-mode)
-  :commands markdown-mode)
+  (markdown-command "pandoc"))
 
 (use-package lua-mode                   ; Lua
-  :mode ("\\.lua\\'" . lua-mode)
-  :commands lua-mode)
+  :mode "\\.lua\\'")
 
 (use-package restclient                 ; REST client
-  :mode ("\\.rest\\'" . restclient-mode)
-  :commands restclient-mode)
+  :mode ("\\.rest\\'" . restclient-mode))
 
 (use-package company-restclient         ; REST client completion
   :after (restclient company)
@@ -56,11 +52,9 @@
               (add-to-list (make-local-variable 'company-backends) 'company-restclient))))
 
 (use-package gradle-mode
-  :mode ("\\.gradle\\'" . gradle-mode)
-  :commands gradle-mode)
+  :mode "\\.gradle\\'")
 
 (use-package groovy-mode
-  :mode ("\\.gradle\\'" . groovy-mode)
-  :commands groovy-mode)
+  :mode "\\.gradle\\'")
 
 ;;; file-modes.el ends here
