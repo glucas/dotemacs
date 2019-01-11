@@ -35,6 +35,7 @@
 
 ;; load use-package
 (setq use-package-compute-statistics t)
+(setq use-package-enable-imenu-support t)
 (require 'use-package)
 
 ;; keep .emacs.d organized
