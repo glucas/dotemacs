@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2019-01-09 15:28:04 glucas>
+;; Time-stamp: <2019-01-11 16:02:30 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -131,8 +131,8 @@
   :config
   (add-hook 'window-setup-hook
             (lambda () (when (get-buffer "*scratch*")
-                         (with-current-buffer "*scratch*"
-                           (yank-temp-set-revert-point)))))
+                    (with-current-buffer "*scratch*"
+                      (yank-temp-set-revert-point)))))
   :config
   (defhydra hydra-setup-yank-temp (:color blue :timeout 3 :post (yank-temp-set-revert-point))
     ("l" lisp-interaction-mode "lisp")

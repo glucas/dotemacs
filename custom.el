@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-12-27 11:57:28 glucas>
+;; Time-stamp: <2019-01-11 16:07:52 glucas>
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -11,7 +11,7 @@
  '(indent-tabs-mode nil)
  '(ls-lisp-use-insert-directory-program t)
  '(package-selected-packages
-   '(minions use-package-hydra ob-html-chrome eyebrowse magit-todos company-quickhelp company-restclient company-terraform company stripe-buffer groovy-mode gradle-mode goto-last-change change-inner edit-server spaceline delight ivy-hydra hydra projectile avy-zap ace-link ace-window avy easy-kill transpose-frame restclient lua-mode markdown-mode jump-char deadgrep try smex counsel swiper ivy magit no-littering terraform-mode unfill powershell use-package))
+   '(which-key iedit diff-hl minions use-package-hydra ob-html-chrome eyebrowse magit-todos company-quickhelp company-restclient company-terraform company stripe-buffer groovy-mode gradle-mode goto-last-change change-inner edit-server spaceline delight ivy-hydra hydra projectile avy-zap ace-link ace-window avy easy-kill transpose-frame restclient lua-mode markdown-mode jump-char deadgrep try smex counsel swiper ivy magit no-littering terraform-mode unfill powershell use-package))
  '(prog-mode-hook '(prettify-symbols-mode show-paren-mode semantic-mode))
  '(scroll-preserve-screen-position 1)
  '(sentence-end-double-space nil)
