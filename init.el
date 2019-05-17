@@ -54,7 +54,7 @@
     (error (message "Cannot load theme: %s" theme))))
 
 ;; Configure mode line
-(load (locate-user-emacs-file "init.d/mode-line"))
+(load (locate-user-emacs-file "init.d/my-mode-line"))
 
 
 ;;; Configure Packages
@@ -104,11 +104,13 @@
     (message "Images are now %s"
              (if shr-inhibit-images "off" "on"))))
 
+(load (locate-user-emacs-file "init.d/my-browser"))
+
 (use-package ediff                      ; Ediff
   :bind
   ("C-c d" . ediff-current-file)
   :config
-  (load (locate-user-emacs-file "init.d/ediff")))
+  (load (locate-user-emacs-file "init.d/my-ediff")))
 
 (use-package try                     ; Try packages without installing
   :commands (try try-and-refresh)
@@ -336,7 +338,8 @@ _k_: next       _q_uit
   (:map org-src-mode-map
         ("C-c C-c" . org-edit-src-exit))
   :config
-  (load (locate-user-emacs-file "init.d/org")))
+  (load (locate-user-emacs-file "init.d/my-org")))
+
 
 ;;;; Projects
 
@@ -418,7 +421,7 @@ current eyebrowse slot: %(eyebrowse--get 'current-slot)
 
 ;;; Editing Modes
 
-(load (locate-user-emacs-file "init.d/file-modes"))
+(load (locate-user-emacs-file "init.d/my-file-modes"))
 
 ;;;; Server
 

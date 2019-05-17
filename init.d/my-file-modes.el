@@ -57,4 +57,15 @@
 (use-package groovy-mode
   :mode "\\.gradle\\'")
 
+;; Git
+
+(use-package gitconfig-mode
+  :mode "/\\.gitconfig\\'")
+
+(use-package gitignore-mode
+  :mode "/\\.gitignore\\'")
+
+(use-package gitattributes-mode
+  :mode "/\\.gitattributes\\'")
+
 ;;; file-modes.el ends here
