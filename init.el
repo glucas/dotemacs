@@ -216,17 +216,20 @@
   (swiper-action-recenter t)
   (swiper-include-line-number-in-search t)
   :bind
-  ([remap isearch-forward-regexp] . swiper)
+  ([remap isearch-forward-regexp] . swiper-isearch)
   (:map isearch-mode-map
         ("SPC" . my/swiper-from-isearch))
   :config
   (defun my/swiper-from-isearch ()
     "Invoke swiper from isearch, adding a space to the query."
     (interactive)
-    (if isearch-regexp
-        (setq isearch-regexp (concat isearch-regexp " "))
-      (setq isearch-string (concat isearch-string " ")))
-    (swiper-from-isearch)))
+    (let*
+        ((query-string (concat isearch-string " "))
+         (query (if isearch-regexp
+                    query-string
+                  (regexp-quote query-string))))
+      (isearch-exit)
+      (swiper-isearch query))))
 
 (use-package counsel                    ; Ivy commands
   :requires ivy
