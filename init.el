@@ -59,6 +59,24 @@
 
 ;;; Configure Packages
 
+(use-package package
+  :bind
+  (:map package-menu-mode-map
+        ("s" . my/package-menu-filter-by-status)
+        ("a" . my/package-menu-find-marks))
+  :config
+  (defun my/package-menu-find-marks ()
+    "Find packages marked for action in *Packages*."
+    (interactive)
+    (occur "^[A-Z]"))
+
+  (defun my/package-menu-filter-by-status (status)
+    "Filter the *Packages* buffer by status."
+    (interactive
+     (list (completing-read
+            "Status: " '("new" "installed" "dependency" "obsolete"))))
+    (package-menu-filter (concat "status:" status))))
+
 (use-package recentf                    ; Recent files
   :hook
   (emacs-startup . recentf-mode)
