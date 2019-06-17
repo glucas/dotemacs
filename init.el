@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2019-01-11 16:02:30 glucas>
+;; Time-stamp: <2019-06-17 11:25:11 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -412,6 +412,11 @@ current eyebrowse slot: %(eyebrowse--get 'current-slot)
   (magit-repository-directories `((,my/source-root-dir . 3)))
   :bind
   (("C-x g" . magit-status)))
+
+(use-package forge
+  :after magit
+  :init
+  (setq emacsql-sqlite-c-compilers '("gcc")))
 
 (use-package deadgrep                   ; ripgrep
   :if (executable-find "rg")
