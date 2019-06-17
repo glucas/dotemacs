@@ -354,8 +354,11 @@ _k_: next       _q_uit
   (org-startup-indented t)
   (org-use-speed-commands t)
   (org-directory "~/Dropbox/org")
-  (org-default-notes-file "inbox.org")
+  (org-default-notes-file (expand-file-name "inbox.org" org-directory))
+  (org-refile-targets '((nil . (:maxlevel . 10)) (org-agenda-files . (:maxlevel . 5))))
   (org-agenda-files (list org-directory))
+  (org-todo-keywords '((sequence "TODO(t)"  "NEXT(n!)" "DOING(g!)" "WAITING(w@)" "SOMEDAY(x)" "|" "DONE(d!)")
+                       (sequence "|" "CANCELLED(c@/!)")))
   :custom-face
   (org-meta-line ((t (:height 0.85))))
   :bind
