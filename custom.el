@@ -11,7 +11,7 @@
  '(indent-tabs-mode nil)
  '(ls-lisp-use-insert-directory-program t)
  '(package-selected-packages
-   '(forge which-key iedit evil-iedit-state diff-hl minions use-package-hydra ob-html-chrome eyebrowse magit-todos company-quickhelp company-restclient company-terraform company stripe-buffer groovy-mode gradle-mode goto-last-change change-inner edit-server spaceline delight ivy-hydra hydra projectile avy-zap ace-link ace-window avy easy-kill transpose-frame restclient lua-mode markdown-mode jump-char deadgrep try smex counsel swiper ivy magit no-littering terraform-mode unfill powershell use-package))
+   '(show-eol dired-collapse forge scala-mode gitignore-mode gitattributes-mode gitconfig-mode github-review multiple-cursors dired-collapse yaml-mode excorporate selected which-key iedit evil-iedit-state diff-hl minions use-package-hydra ob-html-chrome eyebrowse magit-todos company-quickhelp company-restclient company-terraform company stripe-buffer groovy-mode gradle-mode goto-last-change change-inner edit-server spaceline delight ivy-hydra hydra projectile avy-zap ace-link ace-window avy easy-kill transpose-frame restclient lua-mode markdown-mode jump-char deadgrep try smex counsel swiper ivy magit no-littering terraform-mode unfill powershell use-package))
  '(prog-mode-hook '(prettify-symbols-mode show-paren-mode semantic-mode))
  '(scroll-preserve-screen-position 1)
  '(sentence-end-double-space nil)

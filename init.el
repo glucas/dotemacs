@@ -101,6 +101,10 @@
         (dired-kill-subdir)
       (dired-kill-line 1))))
 
+(use-package dired-collapse
+  :hook
+  (dired-mode . dired-collapse-mode))
+
 (use-package eww                        ; Emacs Web Wowser
   :custom
   (shr-use-fonts nil)
@@ -185,6 +189,10 @@
   (hl-line-mode)
   :custom-face
   (hl-line ((t (:background "lavender")))))
+
+(use-package show-eol
+  :commands
+  (show-eol-mode global-show-eol-mode))
 
 ;;;; Ivy
 
