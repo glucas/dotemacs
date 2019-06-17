@@ -409,7 +409,7 @@ _k_: next       _q_uit
   (eyebrowse-wrap-around t)
   (eyebrowse-default-workspace-slot 0)
   :bind
-  ("C-c C-l" . hydra/eyebrowse/body)
+  ("C-c g" . hydra/eyebrowse/body)
   :hydra
   ;; https://www.wisdomandwonder.com/article/10596/screencast-building-a-little-ui-to-manage-buffers
   (hydra/eyebrowse (:color blue :hint nil :body-pre (eyebrowse-mode 1))
@@ -502,13 +502,14 @@ current eyebrowse slot: %(eyebrowse--get 'current-slot)
 (bind-key [remap split-window-right] (new-split-command 'split-window-right))
 
 (bind-keys
+ ("M-`" . pop-global-mark)
  ([remap delete-char] . delete-forward-char)
  ([remap list-buffers] . ibuffer-other-window)
  ([remap kill-buffer] . kill-this-buffer)
  ([remap upcase-word] . upcase-dwim)
  ([remap downcase-word] . downcase-dwim)
- ([remap capitalize-word] . capitalize-dwim)
- ([remap view-hello-file] . (lambda () (interactive) (find-file user-init-file)))
+ ([remap capitalize-word] . capitalize-dwim) ;; TODO frees up C-x C-u and C-x C-l
+ ([remap view-hello-file] . (lambda () (interactive) (find-file user-init-file))) ; C-h h
  )
 
 (bind-keys*
@@ -571,5 +572,29 @@ Changes:
   ("]" forward-page "next")
   ("[" backward-page "prev")
   ("n" narrow-to-page "narrow" :bind nil :exit t))
+
+
+;; Windows and buffers
+(defun flip-window ()
+  (interactive)
+  (let ((win  (get-mru-window 'visible t t)))
+    (if win
+        (progn
+          (select-frame-set-input-focus (window-frame win))
+          (select-window win))
+      (mode-line-other-buffer))))
+
+(defun kill-buffer-and-window-dwim ()
+  "Kill the current window and/or buffer.
+If the current buffer is visible in multiple windows, kill the
+current window.  Otherwise call `kill-buffer-and-window'."
+  (interactive)
+  (if (= 1 (length (get-buffer-window-list (current-buffer))))
+      (kill-buffer-and-window)
+    (delete-window)))
+
+(bind-keys
+ ("M-\\" . flip-window)
+ ("C-c C-k" . kill-buffer-and-window-dwim))
 
 ;;; init.el ends here
