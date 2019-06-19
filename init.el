@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2019-06-17 11:25:11 glucas>
+;; Time-stamp: <2019-06-19 12:18:38 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -531,6 +531,33 @@ current eyebrowse slot: %(eyebrowse--get 'current-slot)
 (bind-keys
  ("C-c w" . my/clean-buffer)
  ("C-c r" . my/revert-buffer))
+
+;; Navigate up/down columns
+;; https://emacs.stackexchange.com/a/22094/780
+(defun my/down-column (arg)
+  "Find next line, on the same column, skipping those that would
+end up leaving point on a space or newline character."
+  (interactive "p")
+  (let* ((hpos (- (point) (point-at-bol)))
+         (re (format "^.\\{%s\\}[^[:space:]\n]" hpos)))
+    (cond ((> arg 0)
+           (forward-char 1) ; don't match current position (can only happen at column 0)
+           (re-search-forward re))
+          ((< arg 0)
+           (forward-char -1)           ; don't match current position.
+           (re-search-backward re)
+           (goto-char (match-end 0))))
+    ;; now point is after the match, let's go back one column.
+    (forward-char -1)))
+
+(defun my/up-column (arg)
+  ""
+  (interactive "p")
+  (my/down-column (- arg)))
+
+(bind-keys
+ ("C-S-n" . my/down-column)            ; move up/down current column
+ ("C-S-p" . my/up-column))
 
 ;; Navigate errors
 (defhydra hydra-next-error
