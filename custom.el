@@ -1,4 +1,4 @@
-;; Time-stamp: <2019-06-17 11:42:29 glucas>
+;; Time-stamp: <2019-08-28 13:32:21 glucas>
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -12,7 +12,7 @@
  '(ls-lisp-use-insert-directory-program t)
  '(org-directory "~/Dropbox/org")
  '(package-selected-packages
-   '(show-eol dired-collapse forge scala-mode gitignore-mode gitattributes-mode gitconfig-mode github-review multiple-cursors dired-collapse yaml-mode excorporate selected which-key iedit evil-iedit-state diff-hl minions use-package-hydra ob-html-chrome eyebrowse magit-todos company-quickhelp company-restclient company-terraform company stripe-buffer groovy-mode gradle-mode goto-last-change change-inner edit-server spaceline delight ivy-hydra hydra projectile avy-zap ace-link ace-window avy easy-kill transpose-frame restclient lua-mode markdown-mode jump-char deadgrep try smex counsel swiper ivy magit no-littering terraform-mode unfill powershell use-package))
+   '(docker show-eol dired-collapse forge scala-mode gitignore-mode gitattributes-mode gitconfig-mode github-review multiple-cursors dired-collapse yaml-mode excorporate selected which-key iedit evil-iedit-state diff-hl minions use-package-hydra ob-html-chrome eyebrowse magit-todos company-quickhelp company-restclient company-terraform company stripe-buffer groovy-mode gradle-mode goto-last-change change-inner edit-server spaceline delight ivy-hydra hydra projectile avy-zap ace-link ace-window avy easy-kill transpose-frame restclient lua-mode markdown-mode jump-char deadgrep try smex counsel swiper ivy magit no-littering terraform-mode unfill powershell use-package))
  '(prog-mode-hook '(prettify-symbols-mode show-paren-mode semantic-mode))
  '(scroll-preserve-screen-position 1)
  '(sentence-end-double-space nil)

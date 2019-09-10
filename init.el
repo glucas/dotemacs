@@ -1,6 +1,6 @@
 ;;; init.el --- My personal Emacs configuration.     -*- lexical-binding: t; -*-
 
-;; Time-stamp: <2019-06-19 12:18:38 glucas>
+;; Time-stamp: <2019-08-28 13:35:08 glucas>
 ;; Author: Greg Lucas <greg@glucas.net>
 ;; Keywords: dotemacs,init,local
 
@@ -130,7 +130,7 @@
 
 (use-package ediff                      ; Ediff
   :bind
-  ("C-c d" . ediff-current-file)
+  ("C-c =" . ediff-current-file)
   :config
   (load (locate-user-emacs-file "init.d/my-ediff")))
 
@@ -235,6 +235,7 @@
   :requires ivy
   :bind
   ("C-c m" . counsel-semantic-or-imenu)
+  ("C-c e" . counsel-register)
   :init
   (counsel-mode))
 
@@ -456,6 +457,10 @@ current eyebrowse slot: %(eyebrowse--get 'current-slot)
   :init
   (defalias 'rg 'deadgrep))
 
+(use-package docker
+  :if (executable-find "docker")
+  :bind ("C-c d" . docker))
+
 ;;; Editing Modes
 
 (load (locate-user-emacs-file "init.d/my-file-modes"))
@@ -623,5 +628,18 @@ current window.  Otherwise call `kill-buffer-and-window'."
 (bind-keys
  ("M-\\" . flip-window)
  ("C-c C-k" . kill-buffer-and-window-dwim))
+
+;; Experimentation
+
+;; TODO not working...
+;; (setq ellocate-scan-dirs '(
+;;                            ("/fbcdev" "~/ellocate-fbc-db")
+;;                            ))
+
+;; (use-package edwina
+;;   :config
+;;   (setq display-buffer-base-action '(display-buffer-below-selected))
+;;   ;; (edwina-setup-dwm-keys)
+;;   (edwina-mode 1))
 
 ;;; init.el ends here
